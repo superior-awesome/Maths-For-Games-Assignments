@@ -36,7 +36,6 @@ Vector3 Vector3::operator+(const Vector3& input_)
 	output.x = x + input_.x;
 	output.y = y + input_.y;
 	output.z = z + input_.z;
-
 	return output;
 }
 
@@ -46,7 +45,6 @@ Vector3& Vector3::operator+=(const Vector3& input_)
 	x += input_.x;
 	y += input_.y;
 	z += input_.z;
-
 	return *this;
 }
 
@@ -58,7 +56,6 @@ Vector3 Vector3::operator-(const Vector3& input_)
 	output.x = x - input_.x;
 	output.y = y - input_.y;
 	output.z = z - input_.z;
-
 	return output;
 }
 
@@ -68,7 +65,6 @@ Vector3& Vector3::operator*=(const float& input_)
 	x *= input_;
 	y *= input_;
 	z *= input_;
-
 	return *this;
 }
 
