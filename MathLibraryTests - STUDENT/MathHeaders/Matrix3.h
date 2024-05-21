@@ -97,7 +97,8 @@ namespace MathClasses
 			
 			return temp;
 		}
-		Matrix3& operator*=(const Matrix3& rhs)
+
+		Matrix3& operator*=(Matrix3& rhs)
 		{
 
 			m1 = (m1 * rhs.m1) + (m4 * rhs.m2) + (m7 * rhs.m3);
@@ -144,7 +145,7 @@ namespace MathClasses
  
 		}
 
-		bool operator == (Matrix3 v_)
+		bool operator == (Matrix3 v_) const
 		{
 			float tollerance = 0.00001f;
 			for (int i = 0; i < 9; i++)
@@ -157,9 +158,9 @@ namespace MathClasses
 			return true;
 		}
 
-		bool operator != (Matrix3 v_)
+		bool operator != (Matrix3 v_) const
 		{
-			return true;
+			return !((*this) == v_);
 		}
 
 		Matrix3 Transposed() const

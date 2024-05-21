@@ -35,30 +35,5 @@ namespace MathClasses
 			y = y_;
 			z = z_;
 		}
-
-		/*
-		Vector3 operator+ (const Vector3& input_);
-		Vector3 operator- (const Vector3& input_);
-		Vector3 operator*(const float& input_) const;
-		Vector3 operator/(const float& input_) const;
-
-		friend Vector3 operator* (float scale, const Vector3 V3_);
-
-		Vector3& operator+= (const Vector3& input_);
-		Vector3& operator*= (const float& input_);
-
-		float Dot(const Vector3 V3_) const;
-		Vector3 Cross(const Vector3& V3_) const;
-		float Magnitude(const Vector3& V3_) const;
-		Vector3 Normalize(const Vector3& V3_) const;
-
-		Vector3 operator*(const Matrix3& Mat3_);
-		Vector3& operator*=(const Matrix3& Mat3_);
-		//	_________________________________________________________________
-	//	Debuggining Functions Below This Point
-
-
-		void PrintVec3();
-		*/
 	};
 }
