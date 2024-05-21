@@ -1,4 +1,12 @@
 #pragma once
+
+#define _VECTOR3_
+
+#ifndef _MATRIX3_
+#define _MATRIX3_
+#include "Matrix3.h"
+#endif	//_MATRIX3_
+
 class Vector3
 {
 public:
@@ -18,9 +26,19 @@ public:
 	Vector3& operator+= (const Vector3& input_);
 	Vector3& operator*= (const float& input_);
 
-	float Dot(const Vector3 V3_);
-	Vector3 Cross(const Vector3 V3_);
-	float Magnitude(const Vector3 V3_);
+	float Dot(const Vector3 V3_) const;
+	Vector3 Cross(const Vector3& V3_) const;
+	float Magnitude(const Vector3& V3_) const;
+	Vector3 Normalize(const Vector3& V3_) const;
+
+	Vector3 operator*(const Matrix3& Mat3_);
+	Vector3& operator*=(const Matrix3& Mat3_);
+
+	//	_________________________________________________________________
+//	Debuggining Functions Below This Point
+
+
+	void PrintVec3();
 };
 
 

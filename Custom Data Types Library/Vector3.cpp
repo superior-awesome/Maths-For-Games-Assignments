@@ -1,10 +1,8 @@
 #include "Vector3.h"
 #include <cmath>
+#include <iostream>
 
-#ifndef _MATRIX3_
-#define _MATRIX3_
-#include "Matrix3.h"
-#endif	//_MATRIX3_
+
 
 //	Default constructor.
 Vector3::Vector3() 
@@ -91,13 +89,13 @@ Vector3 Vector3::operator/(const float& input_) const
 }
 
 // Performs Dot-Product on Vector3, returning a new float.
-float Vector3::Dot(const Vector3 V3_)
+
+float Vector3::Dot(const Vector3 V3_) const
 {
 	return (x * V3_.x + y * V3_.y + z * V3_.z);
 }
-
 // Performs Cross Product on Vector3, returning a new Vector3.
-Vector3 Vector3::Cross(const Vector3 V3_)
+Vector3 Vector3::Cross(const Vector3& V3_) const
 {
 	Vector3 temp(
 		y*V3_.z - z*V3_.y,
@@ -108,14 +106,55 @@ Vector3 Vector3::Cross(const Vector3 V3_)
 }
 
 // Returns the magnitude of a Vector3 in a new float.
-float Magnitude(const Vector3 V3_)
+float Vector3::Magnitude(const Vector3& V3_) const
 {
 	float temp = sqrtf(pow(V3_.x,2.0f) + pow(V3_.y,2.0f) + pow(V3_.z,2.0f));
 	return temp;
 }
 
 // Returns the unit vector of a Vector3 as a new float.
-Vector3 Normalize(const Vector3 V3_)
+Vector3 Vector3::Normalize(const Vector3& V3_) const
 {
 	return V3_ / Magnitude(V3_);
 }
+
+
+// Multiplies a Vector3 by a Matrix3 to return a new Vector3.
+Vector3 Vector3::operator*(const Matrix3& Mat3_)
+{
+	Vector3 temp;
+	
+	temp.x = Mat3_.m11 * x + Mat3_.m12 * y + Mat3_.m13 * z;
+	temp.y = Mat3_.m21 * x + Mat3_.m22 * y + Mat3_.m23 * z;
+	temp.z = Mat3_.m31 * x + Mat3_.m32 * y + Mat3_.m33 * z;
+
+	return temp;
+}
+
+Vector3& Vector3::operator*=(const Matrix3& Mat3_)
+{
+	std::cout << "PING" << std::endl;
+	
+	Vector3 temp = (*this) * Mat3_;
+
+	x = temp.x;
+	y = temp.y;
+	z = temp.z;
+
+	return *this;
+}
+
+
+
+//	_________________________________________________________________
+//	Debuggining Functions Below This Point
+
+void Vector3::PrintVec3()
+{
+	std::cout <<"[" << x << "]" <<
+		"\n[" << y << "]" <<
+		"\n[" << z << "]" <<
+		"\n\n" << std::endl;
+}
+/*
+*/

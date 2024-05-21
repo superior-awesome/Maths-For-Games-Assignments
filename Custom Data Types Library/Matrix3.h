@@ -1,11 +1,15 @@
 #pragma once
 
-#include "Vector3.h"
+#define _MATRIX3_
 
 class Matrix3
 {
 public:
-	float m11,m12,m13, m21, m22, m23, m31, m32, m33;
+
+	float 
+		m11,	m12,	m13, 
+		m21,	m22,	m23, 
+		m31,	m32,	m33;
 
 	Matrix3();
 	Matrix3(const Matrix3& other);
@@ -15,12 +19,17 @@ public:
 
 	Matrix3& operator=(const Matrix3& other);
 
-	Vector3 operator*(const Vector3& vec3_);
 	Matrix3 operator*(const Matrix3& mat3_);
-	
 	Matrix3& operator*=(const Matrix3& mat3_);
 	
-	Matrix3& SetRotateX(float a);
+	Matrix3 SetRotateX(float a);
+	Matrix3 SetRotateY(float a);
+	Matrix3 SetRotateZ(float a);
+
+	Matrix3 MakeEuler(float x, float y, float z);
+	Matrix3 MakeEuler(class Vector3 Vec_);
+
+	void PrintMat3();
 
 };
 
