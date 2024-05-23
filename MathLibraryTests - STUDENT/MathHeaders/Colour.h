@@ -3,8 +3,25 @@
 namespace MathClasses
 {
     struct Colour
-    {
-        // Add the struct data fields and methods, as per the tutorials and exercises, here...
-        // ...
-    };
+	{
+	public:
+
+		Colour();
+
+		unsigned char GetRed() const;
+		unsigned char GetGreen() const;
+		unsigned char GetBlue() const;
+		unsigned char GetAlpha() const;
+
+		void SetRed(unsigned char input);
+		void SetGreen(unsigned char input);
+		void SetBlue(unsigned char input);
+		void SetAlpha(unsigned char input);
+
+		void printColour();
+
+	private:
+		unsigned int colour;
+
+	};
 }
