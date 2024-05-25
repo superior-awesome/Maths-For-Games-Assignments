@@ -47,10 +47,11 @@ namespace MathClasses
 		Matrix4 Matrix4::MakeIdentity()
 		{
 			Matrix4 identity(0);
-			identity.m1 = 1;
-			identity.m6 = 1;
-			identity.m11 = 1;
-			identity.m16 = 1;
+
+			identity.m1 = 1.0f;
+			identity.m6 = 1.0f;
+			identity.m11 = 1.0f;
+			identity.m16 = 1.0f;
 
 
 			return identity;

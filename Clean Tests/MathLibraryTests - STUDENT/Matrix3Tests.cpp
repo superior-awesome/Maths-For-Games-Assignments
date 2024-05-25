@@ -1,11 +1,9 @@
-/*
 #include "CppUnitTest.h"
 #include "TestToString.h"
 
 #include "Utils.h"
 #include "MathHeaders/Matrix3.h"
 #include "MathHeaders/Vector3.h"
-
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using ::MathClasses::Matrix3;
@@ -199,4 +197,3 @@ namespace MathLibraryTests_OPTIONAL
 		}
 	};
 }
-*/

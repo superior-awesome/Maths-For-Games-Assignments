@@ -1,10 +1,16 @@
 #pragma once
 #include "Vector4.h"
 
+#ifndef _CMATH_
+#define _CMATH_
+#include <cmath>
+#endif // _CMATH_
+
 namespace MathClasses
 {
-	struct Matrix4
+	class Matrix4
 	{
+	public:
 		union
 		{
 			struct
@@ -35,6 +41,12 @@ namespace MathClasses
 		bool operator==(Matrix4 v_) const;
 		bool operator != (Matrix4 v_) const;
 		Matrix4 Transposed() const;
+
+
+		std::string ToString() const
+		{
+			return "Matrix4 ToString incomplete";
+		};
 	};
 
 

@@ -1,7 +1,14 @@
+
+#ifndef _CMATH_
+#define _CMATH_
+#include <cmath>
+#endif // _CMATH_
+
 namespace MathClasses
 {
 	class Matrix3
 	{
+	public:
 		union
 		{
 			struct
@@ -10,15 +17,16 @@ namespace MathClasses
 			};
 			float v[9];
 			float mm[3][3];
-			class Vector3 axis[3];
+			Vector3 axis[3];
 		};
 
 
-	public:
 
 		Matrix3();
 
 		Matrix3(float f_);
+
+		Matrix3(float f_[9]);
 
 		Matrix3(float m1_, float m2_, float m3_,
 			float m4_, float m5_, float m6_,
@@ -36,11 +44,11 @@ namespace MathClasses
 		Matrix3& operator*=(Matrix3& rhs);
 		Matrix3& operator*=(const Matrix3& rhs);
 
-		class Vector3 operator*(Vector3 rhs) const;
+		Vector3 operator*(Vector3 rhs) const;
 
-		bool operator == (class Matrix3 v_) const;
+		bool operator == (Matrix3 v_) const;
 
-		bool operator != (class Matrix3 v_) const;
+		bool operator != (Matrix3 v_) const;
 
 		Matrix3 Transposed() const;
 
@@ -53,7 +61,19 @@ namespace MathClasses
 		Matrix3 MakeScale(Vector3 scale);
 		Matrix3 MakeScale(float xScale, float yScale, float zScale);
 
+		Matrix3 MakeTranslation(float x_, float y_);
+		Matrix3 MakeTranslation(float x_, float y_, float z_);
 
+		Matrix3& Translate(float x_, float y_);
+		Matrix3& Translate(float x_, float y_, float z_);
+		//Matrix3& Translate(Vector3 offset_);
+
+
+			
+		std::string ToString() const
+		{
+			return "Matrix3 ToString incomplete";
+		};
 
 	};
-}
+};

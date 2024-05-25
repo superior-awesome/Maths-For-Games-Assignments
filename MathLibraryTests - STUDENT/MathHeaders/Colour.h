@@ -8,6 +8,12 @@ namespace MathClasses
 
 		Colour();
 
+		Colour(unsigned char r_, unsigned char g_, unsigned char b_, unsigned char a_);
+
+		bool operator==(Colour c_);
+
+		bool operator!=(Colour c_);
+
 		unsigned char GetRed() const;
 		unsigned char GetGreen() const;
 		unsigned char GetBlue() const;
@@ -20,8 +26,8 @@ namespace MathClasses
 
 		void printColour();
 
-	private:
 		unsigned int colour;
+	private:
 
 	};
 }

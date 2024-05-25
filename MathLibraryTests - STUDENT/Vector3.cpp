@@ -1,12 +1,11 @@
 #pragma once
-
+#ifndef _VECTOR3_
 #include "../MathHeaders/Vector3.h"
-#include <cmath>
+#define _VECTOR3_
+#endif // !_VECTOR3_
 
 namespace MathClasses
 {
-
-
 	Vector3::Vector3()
 	{
 		for (int i = 0; i < 3; i++)
@@ -27,12 +26,153 @@ namespace MathClasses
 		x = x_;
 		y = y_;
 		z = z_;
+	};
+
+	Vector3 Vector3::operator+(Vector3 rhs_)
+	{
+		return Vector3(
+			x + rhs_.x,
+			y + rhs_.y,
+			z + rhs_.z
+		);
 	}
 
+	Vector3& Vector3::operator+=(Vector3 rhs_)
+	{
+		x += rhs_.x;
+		y += rhs_.y;
+		z += rhs_.z;
+
+		return *this;
+	};
+
+	Vector3 Vector3::operator-(Vector3 rhs_)
+	{
+		return Vector3(
+			x - rhs_.x,
+			y - rhs_.y,
+			z - rhs_.z
+		);
+	};
+	
+	Vector3& Vector3::operator-=(Vector3 rhs_)
+	{
+		x -= rhs_.x;
+		y -= rhs_.y;
+		z -= rhs_.z;
+
+		return *this;
+	};
+
+	Vector3 Vector3::operator*(float f_)
+	{
+		return Vector3(
+			x *= f_,
+			y *= f_,
+			z *= f_
+		);
+	};	
+
+	Vector3& Vector3::operator*=(float f_)
+	{
+		x *= f_;
+		y *= f_;
+		z *= f_;
+
+		return *this;
+	};
+
+	Vector3 Vector3::operator/(float f_)
+	{
+		return Vector3(
+			x /= f_,
+			y /= f_,
+			z /= f_
+		);
+	}
+
+	Vector3& Vector3::operator/=(float f_)
+	{
+		x /= f_;
+		y /= f_;
+		z /= f_;	
+		return *this;
+	};
+	
+	
+	Vector3 operator*(float scale, const Vector3 V3_)
+	{
+		return Vector3(
+			V3_.x * scale,
+			V3_.y * scale,
+			V3_.z * scale
+		);
+	};
+
+	Vector3 operator/(float scale, const Vector3 V3_)
+	{
+		return Vector3(
+			V3_.x / scale,
+			V3_.y / scale,
+			V3_.z / scale
+		);
+	};
+
+	bool Vector3::operator==(Vector3 rhs_)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			if (x != rhs_.x)
+			{
+				return false;
+			};
+		};
+
+		return true;
+	};
+
+	bool Vector3::operator!=(Vector3 rhs_)
+	{
+
+		if ((*this) == rhs_)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		};
+
+	};
+
+	float& Vector3::operator[](int dim)
+	{
+		return v[dim];
+	};
+
+	float Vector3::operator[](int dim) const
+	{
+		return v[dim];
+	}
+	
+	Vector3::operator float*() 
+	{
+
+		float* temp = NULL;
+			//= &(v[0]);
+			//x = (float)x;
+			//y = (float)y;
+			//z = (float)z;
+
+			return temp;
+	};
+
+	
 	float Vector3::Magnitude() const
 	{
 		return sqrtf(x * x + y * y + z * z);
 	};
+
 
 	void Vector3::Normalise()
 	{
@@ -85,4 +225,15 @@ namespace MathClasses
 		return acosf(c);
 	};
 
-}
+	//Why does this not want to be scoped into the Vector3 scope?
+	//void Vector3::ToString()
+//	{
+	//	std::string output("ToString not implemented");
+
+		//return output;
+	//};
+	
+	
+
+
+};

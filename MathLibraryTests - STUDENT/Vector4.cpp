@@ -29,7 +29,12 @@ namespace MathClasses
 		y = y_;
 		z = z_;
 		w = w_;
-	};
+	}
+	float Vector4::operator[](int dim)
+	{
+		return v[dim];
+	}
+	;
 
 	float Vector4::Magnitude() const
 	{
@@ -76,7 +81,13 @@ namespace MathClasses
 			x * rhs_.y - y * rhs_.x,
 			0
 		);
+	}
+	float Vector4::AngleBetween(const Vector4& other) const
+	{
+
+		return 0.0f;
 	};
+
 
 
 }

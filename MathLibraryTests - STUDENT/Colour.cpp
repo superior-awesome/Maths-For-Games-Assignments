@@ -8,6 +8,36 @@ namespace MathClasses
 	{
 		colour = 0x0;
 	}
+	
+	Colour::Colour(unsigned char r_, unsigned char g_, unsigned char b_, unsigned char a_)
+	{
+		colour = 0x0;
+		SetRed(r_);
+		SetGreen(g_);
+		SetBlue(b_);
+		SetAlpha(a_);
+	}
+
+	bool Colour::operator==(Colour c_)
+	{
+		if (
+			GetRed() == c_.GetRed() &&
+			GetBlue() == c_.GetBlue() &&
+			GetGreen() == c_.GetGreen() &&
+			GetAlpha() == c_.GetAlpha()
+			)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	};
+	bool Colour::operator!=(Colour c_)
+	{
+		return !((*this) == c_);
+	}
 
 	unsigned char Colour::GetRed() const
 	{

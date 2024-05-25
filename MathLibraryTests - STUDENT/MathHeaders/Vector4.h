@@ -1,4 +1,10 @@
 #pragma once
+#include <string>
+
+#ifndef _CMATH_
+#define _CMATH_
+#include <cmath>
+#endif // _CMATH_
 
 namespace MathClasses
 {
@@ -18,6 +24,8 @@ namespace MathClasses
 		Vector4(float f_);
 		Vector4(float x_, float y_, float z_, float w_);
 
+		float operator[](int dim);
+
 		float Magnitude() const;
 
 		void Normalise();
@@ -27,5 +35,11 @@ namespace MathClasses
 		Vector4 Cross(const Vector4& rhs_);
 
 		float AngleBetween(const Vector4& other) const;
+
+		std::string ToString() const
+		{
+			return "Vector4 ToString incomplete";
+		};
+
 	};
 };

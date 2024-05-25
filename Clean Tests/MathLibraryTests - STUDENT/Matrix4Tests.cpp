@@ -1,5 +1,3 @@
-/*
-
 #include "CppUnitTest.h"
 #include "TestToString.h"
 
@@ -262,4 +260,3 @@ namespace MathLibraryTests_OPTIONAL
         }
     };
 }
-*/
