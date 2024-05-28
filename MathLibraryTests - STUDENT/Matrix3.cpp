@@ -18,7 +18,8 @@ namespace MathClasses
 		for (int i = 0; i < 9; i++)
 		{
 			v[i] = 0.0f;
-		}
+		};
+		v[0] = v[4] = v[8] = 1.0f;
 	};
 
 	Matrix3::Matrix3(float f_)
@@ -26,7 +27,7 @@ namespace MathClasses
 		for (int i = 0; i < 9; i++)
 		{
 			v[i] = f_;
-		}
+		};
 	};
 
 	Matrix3::Matrix3(float f_[9])
@@ -148,8 +149,42 @@ namespace MathClasses
 
 	bool Matrix3::operator != (Matrix3 v_) const
 	{
-		return !((*this) == v_);
+		float tollerance = 0.00001f;
+		for (int i = 0; i < 9; i++)
+		{
+			if ((v[i] - v_[i]) > tollerance)	//	Need to do ABS
+			{
+				return true;
+			}
+		};
+		return false;
 	}
+
+	bool MathClasses::operator==(Matrix3 lhs_, Matrix3 rhs_)
+	{
+		float tollerance = 0.00001f;
+		for (int i = 0; i < 9; i++)
+		{
+			if ((lhs_.v[i] - rhs_.v[i]) > tollerance)	//	Need to do ABS
+			{
+				return true;
+			}
+		};
+		return false;
+	};
+	
+	bool MathClasses::operator!=(Matrix3 lhs_, Matrix3 rhs_)
+	{
+		float tollerance = 0.00001f;
+		for (int i = 0; i < 9; i++)
+		{
+			if ((lhs_.v[i] - rhs_.v[i]) > tollerance)	//	Need to do ABS
+			{
+				return false;
+			}
+		};
+		return true;
+	};
 
 	Matrix3::operator float* ()
 	{
@@ -204,7 +239,12 @@ namespace MathClasses
 						0.0f, yScale, 0.0f,
 						0.0f, 0.0f, zScale
 		);
-	};
+	}
+	Matrix3 Matrix3::MakeScale(float xScale, float yScale)
+	{
+		return MakeScale(xScale,yScale,1);
+	}
+	;
 	
 	Matrix3 Matrix3::MakeScale(Vector3 scale)
 	{
@@ -213,29 +253,22 @@ namespace MathClasses
 
 	Matrix3 Matrix3::MakeTranslation(float x_, float y_)
 	{
-		Matrix3 temp(
-			1, 0, 0,
-			0, 1, 0,
-			x_, y_, 1
-		);
-
-		return temp;
+		return MakeTranslation(x_,y_,1);
 	};
 
+	Matrix3 Matrix3::MakeTranslation(Vector3 v_)
+	{
+		return MakeTranslation(v_.x,v_.y,v_.z);
+	}
 	Matrix3 Matrix3::MakeTranslation(float x_, float y_, float z_)
 	{
-		Matrix3 temp(
-			1,	0,	0,
-			0,	1,	0,
-			x_,		y_,		z_
-		);
+		return Matrix3();
+	}
+	;
 
-		return temp;
-	};
 
 	Matrix3& Matrix3::Translate(float x_, float y_)
 	{
-
 		v[6] += x_;
 		v[7] += y_;
 		return *this;

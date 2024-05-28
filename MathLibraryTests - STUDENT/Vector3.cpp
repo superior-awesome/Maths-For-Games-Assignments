@@ -1,9 +1,7 @@
 #pragma once
-#ifndef _VECTOR3_
 #include "../MathHeaders/Vector3.h"
-#define _VECTOR3_
-#endif // !_VECTOR3_
 
+#include <cmath>
 
 namespace MathClasses
 {
@@ -120,25 +118,40 @@ namespace MathClasses
 		);
 	}
 
-	bool MathClasses::Vector3::operator==(Vector3 rhs_) const
+	bool MathClasses::operator==(const Vector3 lhs_, const Vector3 rhs_)
 	{
-		return x == rhs_.x && y == rhs_.y && z == rhs_.z;
+		return
+			abs(lhs_.x - rhs_.x) < 0.00001f &&
+			abs(lhs_.y - rhs_.y) < 0.00001f &&
+			abs(lhs_.z - rhs_.z) < 0.00001f;
 	}
 
-	bool MathClasses::operator==(Vector3 lhs_, Vector3 rhs_) 
+	bool MathClasses::operator!=(const Vector3 lhs_, const Vector3 rhs_) // DONT TOUCH THIS.
 	{
-		return  lhs_.x == rhs_.x && lhs_.y == rhs_.y && lhs_.z == rhs_.z;
+		return  !(
+				abs(lhs_.x - rhs_.x) < 0.00001f &&
+				abs(lhs_.y - rhs_.y) < 0.00001f &&
+				abs(lhs_.z - rhs_.z) < 0.00001f
+				);
 	};
 
-	bool MathClasses::Vector3::operator!=(Vector3 rhs_) const
+	bool Vector3::operator==(const Vector3 rhs_) const
 	{
-		return  !(x == rhs_.x && y == rhs_.y && z == rhs_.z);
+		return
+			abs(x - rhs_.x) < 0.00001f &&
+			abs(y - rhs_.y) < 0.00001f &&
+			abs(z - rhs_.z) < 0.00001f;
+
+	}
+	bool Vector3::operator!=(const Vector3 rhs_) const
+	{
+		return !(
+			abs(x - rhs_.x) < 0.00001f &&
+			abs(y - rhs_.y) < 0.00001f &&
+			abs(z - rhs_.z) < 0.00001f
+		);
 	};
 
-	bool MathClasses::operator!=(Vector3 lhs_, Vector3 rhs_)
-	{
-		return  !(lhs_.x == rhs_.x && lhs_.y == rhs_.y && lhs_.z == rhs_.z);
-	};
 
 	float& Vector3::operator[](int dim)
 	{

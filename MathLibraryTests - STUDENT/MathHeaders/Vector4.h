@@ -39,11 +39,14 @@ namespace MathClasses
 
 		friend Vector4 operator* (float scale, const Vector4 V4_);
 		friend Vector4 operator/ (float scale, const Vector4 V4_);
+		
+		friend bool Vector4::operator==(Vector4 lhs_, Vector4 rhs_);
+		friend bool Vector4::operator!=(Vector4 lhs_, Vector4 rhs_);
 
-		bool operator==(Vector4 rhs_);
-		friend bool operator==(Vector4 lhs_, Vector4 rhs_);
-		bool operator!=(Vector4 rhs_);
-		friend bool operator!=(Vector4 lhs_, Vector4 rhs_);
+		bool operator==(Vector4 rhs_) const;
+		bool operator!=(Vector4 rhs_) const;
+		
+		
 
 		float operator[](int dim) const;
 		float& operator[](int dim);

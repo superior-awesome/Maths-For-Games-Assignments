@@ -1,5 +1,4 @@
 #pragma once
-
 #include "..\MathHeaders\Vector4.h"
 #include <cmath>
 
@@ -121,61 +120,42 @@ namespace MathClasses
 		);
 	}
 
-
-	bool Vector4::operator==(Vector4 rhs_)
+	bool MathClasses::operator==(Vector4 lhs_, Vector4 rhs_)
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			if ((abs(v[i] - rhs_.v[i])) > 0.00001f)
-			{
-				return false;
-			};
-		};
+		return	abs(lhs_.x - rhs_.x) < 0.00001f &&
+				abs(lhs_.y - rhs_.y) < 0.00001f &&
+				abs(lhs_.z - rhs_.z) < 0.00001f &&
+				abs(lhs_.w - rhs_.w) < 0.00001f;
+	}
 
-		return true;
-	};
-
-	bool operator==(Vector4 lhs_, Vector4 rhs_)
+	bool MathClasses::operator!=(Vector4 lhs_, Vector4 rhs_)
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			if ((abs(lhs_.v[i] - rhs_.v[i])) > 0.00001f)
-			{
-				return false;
-			};
-		};
+		return  !(
+			abs(lhs_.x - rhs_.x) < 0.00001f &&
+			abs(lhs_.y - rhs_.y) < 0.00001f &&
+			abs(lhs_.z - rhs_.z) < 0.00001f &&
+			abs(lhs_.w - rhs_.w) < 0.00001f
+			);
+	}
 
-		return true;
-	};
-
-	bool Vector4::operator!=(Vector4 rhs_)
+	bool Vector4::operator==(Vector4 rhs_) const
 	{
+		return
+			abs(x - rhs_.x) < 0.00001f &&
+			abs(y - rhs_.y) < 0.00001f &&
+			abs(z - rhs_.z) < 0.00001f &&
+			abs(w - rhs_.w) < 0.00001f;
 
-		for (int i = 0; i < 4; i++)
-		{
-			if ((abs(v[i] - rhs_.v[i])) > 0.00001f)
-			{
-				return true;
-			};
-		};
-
-		return false;
-
-	};
-
-	bool operator!=(Vector4 lhs_, Vector4 rhs_)
+	}
+	bool Vector4::operator!=(Vector4 rhs_) const
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			if ((abs(lhs_.v[i] - rhs_.v[i])) > 0.00001f)
-			{
-				return true;
-			};
-		};
-
-		return false;
+		return !(
+			abs(x - rhs_.x) < 0.00001f &&
+			abs(y - rhs_.y) < 0.00001f &&
+			abs(z - rhs_.z) < 0.00001f &&
+			abs(w- rhs_.w) < 0.00001f
+			);
 	};
-
 
 	float Vector4::operator[](int dim) const
 	{

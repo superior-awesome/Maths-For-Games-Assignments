@@ -1,3 +1,4 @@
+#pragma once
 
 #ifndef _CMATH_
 #define _CMATH_
@@ -20,8 +21,6 @@ namespace MathClasses
 			Vector3 axis[3];
 		};
 
-
-
 		Matrix3();
 
 		Matrix3(float f_);
@@ -43,12 +42,14 @@ namespace MathClasses
 		Matrix3& operator*=(Matrix3& rhs);
 
 		Matrix3& operator*=(const Matrix3& rhs);
-
 		Vector3 operator*(Vector3 rhs) const;
 
-		bool operator == (Matrix3 v_) const;
 
+		bool operator == (Matrix3 v_) const;
 		bool operator != (Matrix3 v_) const;
+
+		friend bool Matrix3::operator==(Matrix3 lhs_, Matrix3 rhs_);
+		friend bool Matrix3::operator!=(Matrix3 lhs_, Matrix3 rhs_);
 
 		operator float* ();
 
@@ -63,8 +64,10 @@ namespace MathClasses
 
 		static Matrix3 MakeScale(Vector3 scale);
 		static Matrix3 MakeScale(float xScale, float yScale, float zScale);
+		static Matrix3 MakeScale(float xScale, float yScale);
 
 		static Matrix3 MakeTranslation(float x_, float y_);
+		static Matrix3 MakeTranslation(Vector3 v_);
 		static Matrix3 MakeTranslation(float x_, float y_, float z_);
 
 		Matrix3& Translate(float x_, float y_);
