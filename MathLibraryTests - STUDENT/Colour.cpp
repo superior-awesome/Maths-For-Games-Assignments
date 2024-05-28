@@ -7,6 +7,7 @@ namespace MathClasses
 	Colour::Colour()
 	{
 		colour = 0x0;
+		SetAlpha(255);
 	}
 	
 	Colour::Colour(unsigned char r_, unsigned char g_, unsigned char b_, unsigned char a_)

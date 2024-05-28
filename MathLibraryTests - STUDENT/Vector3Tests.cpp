@@ -1,5 +1,6 @@
 
 
+
 #include "CppUnitTest.h"
 #include "TestToString.h"
 
@@ -171,6 +172,7 @@ namespace MathLibraryTests_OPTIONAL
 		}
 		TEST_METHOD(Cast)
 		{
+			
 			Vector3 v3a(10, 2, 6);
 
 			float* p = (float*)v3a;
@@ -182,6 +184,8 @@ namespace MathLibraryTests_OPTIONAL
 			Assert::AreEqual(q[0], 10.f);
 			Assert::AreEqual(q[1], 2.f);
 			Assert::AreEqual(q[2], 6.f);
+			
 		}
 	};
 }
+

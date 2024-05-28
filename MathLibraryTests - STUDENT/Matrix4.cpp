@@ -1,4 +1,5 @@
 #include "../MathHeaders/Matrix4.h"
+#include "../MathHeaders/Vector3.h"
 
 #include <cmath>
 
@@ -11,11 +12,13 @@ namespace MathClasses
 			{
 				v[i] = 0;
 			}
+
+			m1, m6, m11, m16 = 0;
 		};
 
 		Matrix4::Matrix4(float f_)
 		{
-			for (int i = 0; i < 9; i++)
+			for (int i = 0; i < 16; i++)
 			{
 				v[i] = f_;
 			}
@@ -44,9 +47,29 @@ namespace MathClasses
 			m16 = m16_;
 		};
 
+		Matrix4::Matrix4(float f_[16])
+		{
+			m1 = f_[1];
+			m2 = f_[2];
+			m3 = f_[3];
+			m4 = f_[4];
+			m5 = f_[5];
+			m6 = f_[6];
+			m7 = f_[7];
+			m8 = f_[8];
+			m9 = f_[9];
+			m10 = f_[10];
+			m11 = f_[11];
+			m12 = f_[12];
+			m13 = f_[13];
+			m14 = f_[14];
+			m15 = f_[15];
+			m16 = f_[16];
+		};
+
 		Matrix4 Matrix4::MakeIdentity()
 		{
-			Matrix4 identity(0);
+			Matrix4 identity;
 
 			identity.m1 = 1.0f;
 			identity.m6 = 1.0f;
@@ -65,6 +88,11 @@ namespace MathClasses
 		const float& Matrix4::operator [](int dim) const
 		{
 			return v[dim];
+		}
+		
+		Matrix4::operator float* ()
+		{
+			return &v[0];
 		};
 
 		Matrix4 Matrix4::operator*(const Matrix4& rhs) const
@@ -77,7 +105,8 @@ namespace MathClasses
 				{
 					int targetArray = (1 + y + (4 * x));
 
-					temp[targetArray] = (mm[x][0] * rhs.mm[0][y]) +
+					temp[targetArray] = 
+						(mm[x][0] * rhs.mm[0][y]) +
 						(mm[x][1] * rhs.mm[1][y]) +
 						(mm[x][2] * rhs.mm[2][y]) +
 						(mm[x][3] * rhs.mm[3][y]);
@@ -118,7 +147,7 @@ namespace MathClasses
 				if (abs(v[i] - v_[i]) > tollerance)
 				{
 					return false;
-				}
+				};
 			};
 			return true;
 		};
@@ -135,5 +164,93 @@ namespace MathClasses
 				m3, m7, m11, m15,
 				m4, m8, m12, m16
 			);
+		}
+		Matrix4 Matrix4::MakeRotateX(float a)
+		{
+			return Matrix4(	1.0f,	0.0f,		0.0f,		0.0f,
+							0.0f,	cosf(a),	-sinf(a),	0.0f,
+							0.0f,	sinf(a),	cosf(a),	0.0f,
+							0.0f,	0.0f,		0.0f,		1.0f
+			);
+		}
+		Matrix4 Matrix4::MakeRotateY(float a)
+		{
+			return Matrix4(cosf(a), 0, -sinf(a), 0.0f,
+				0.0f, 1, 0, 0.0f,
+				sinf(a), 0.0f, cosf(a), 1.0f,
+				0, 0, 0, 1
+			);
+		};
+
+		Matrix4 Matrix4::MakeRotateZ(float a)
+		{
+			return Matrix4(cosf(a), -sinf(a), 0, 0,
+				sinf(a), cosf(a), 0, 0,
+				0.0f, 0.0f, 1, 0,
+				0, 0, 0, 1
+			);
+		};
+
+		Matrix4 Matrix4::MakeEuler(float pitch, float yaw, float roll)
+		{
+			Matrix4 x = MakeRotateX(pitch);
+			Matrix4 y = MakeRotateY(yaw);
+			Matrix4 z = MakeRotateZ(roll);
+
+			return z * y * x;
+		};
+
+		Matrix4 Matrix4::MakeEuler(Vector3 v_)
+		{
+
+			return MakeEuler(v_.x, v_.y, v_.z);
+
+		};
+
+		Matrix4 Matrix4::MakeTranslation(float x_, float y_, float z_)
+		{
+			Matrix4 temp(1, 0, 0, 0,
+				0, 1, 0, 0,
+				0, 0, 1, 0,
+				x_, y_, z_, 1);
+			return temp;
+
+		};
+
+		Matrix4 Matrix4::MakeScale(float xScale, float yScale, float zScale)
+		{
+			return Matrix4(xScale, 0.0f, 0.0f, 0,
+				0.0f, yScale, 0.0f, 0,
+				0.0f, 0.0f, zScale, 0,
+				0, 0, 0, 1
+			);
+		};
+
+
+		Matrix4 Matrix4::MakeScale(Vector3 v_)
+		{
+			return MakeScale(v_.x,v_.y,v_.z);
+		};
+
+		Matrix4 Matrix4::MakeTranslation(Vector3 v_)
+		{
+			return MakeTranslation(v_.x, v_.y, v_.z);
+		};
+
+		std::string Matrix4::ToString() const
+		{
+			std::string output;
+
+			for (int i = 0; i < 16; i++)
+			{
+				if ((i) % 4 == 0 && i > 0)
+				{
+					output.append( "\n");
+				};
+				output.append(std::to_string(float(v[i])));
+			};
+			
+
+			return output;
 		};
 };

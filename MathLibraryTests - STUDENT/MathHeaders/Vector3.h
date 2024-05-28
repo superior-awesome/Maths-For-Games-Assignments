@@ -40,8 +40,15 @@ namespace MathClasses
 		friend Vector3 operator* (float scale, const Vector3 V3_);
 		friend Vector3 operator/ (float scale, const Vector3 V3_);
 
-		bool operator==(Vector3 rhs_);
-		bool operator!=(Vector3 rhs_);
+		//-----------------------------
+		
+		bool operator==(Vector3 rhs_) const;
+		friend bool Vector3::operator==(Vector3 lhs_, Vector3 rhs_) ;
+		
+		bool operator!=(Vector3 rhs_) const;
+		friend bool Vector3::operator!=(Vector3 lhs_, Vector3 rhs_);
+		
+		//-----------------------------
 
 		float& operator[](int dim);
 		float operator[](int dim) const;
@@ -57,11 +64,7 @@ namespace MathClasses
 
 		float AngleBetween(const Vector3& other) const;
 
-		//std::string ToString();
-		std::string ToString() const
-		{
-			return "Vector3 ToString incomplete";
-		};
+		std::string ToString() const;
 
 	};
 };

@@ -28,26 +28,41 @@ namespace MathClasses
 			float m5_, float m6_, float m7_, float m8_,
 			float m9_, float m10_, float m11_, float m12_,
 			float m13_, float m14_, float m15_, float m16_);
+		Matrix4(float f_[16]);
 
 		static Matrix4 MakeIdentity();
 
 		float& operator[](int dim);
-
 		const float& operator[](int dim) const;
+
+		operator float* ();
 
 		Matrix4 operator*(const Matrix4& rhs) const;
 		Matrix4& operator*=(const Matrix4& rhs);
+
 		Vector4 operator*(Vector4 rhs) const;
+
 		bool operator==(Matrix4 v_) const;
+
+		//bool operator==(Matrix4 v_);
 		bool operator != (Matrix4 v_) const;
+
 		Matrix4 Transposed() const;
 
+		static Matrix4 MakeRotateX(float a);
+		static Matrix4 MakeRotateY(float a);
+		static Matrix4 MakeRotateZ(float a);
 
-		std::string ToString() const
-		{
-			return "Matrix4 ToString incomplete";
-		};
+		static Matrix4 MakeEuler(float pitch, float yaw, float roll);
+
+		static Matrix4 MakeEuler(class Vector3 v_);
+
+		static Matrix4 MakeTranslation(float x_, float y_, float z_);
+		static Matrix4 MakeTranslation(class Vector3 v_);
+
+		static Matrix4 MakeScale(float xScale, float yScale, float zScale);
+		static Matrix4 MakeScale(Vector3 v_);
+
+		std::string ToString() const;
 	};
-
-
 };

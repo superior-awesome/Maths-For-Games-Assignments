@@ -132,9 +132,8 @@ namespace MathClasses
 			rhs.x * m2 + rhs.y * m5 + rhs.z * m8,
 			rhs.x * m3 + rhs.y * m6 + rhs.z * m9
 		);
-	};
-
-	bool Matrix3::operator == (Matrix3 v_) const
+	}
+	bool Matrix3::operator==(Matrix3 v_) const
 	{
 		float tollerance = 0.00001f;
 		for (int i = 0; i < 9; i++)
@@ -150,6 +149,11 @@ namespace MathClasses
 	bool Matrix3::operator != (Matrix3 v_) const
 	{
 		return !((*this) == v_);
+	}
+
+	Matrix3::operator float* ()
+	{
+		return &v[0];
 	};
 
 	Matrix3 Matrix3::Transposed() const
@@ -159,25 +163,25 @@ namespace MathClasses
 
 	Matrix3 Matrix3::MakeRotateX(float a)
 	{
-		return(	1.0f,		0.0f,			0.0f,
-				0.0f,		cosf(a),	-sinf(a),
-				0.0f,		sinf(a),	cosf(a)
-				);
+		return Matrix3(	1.0f,		0.0f,			0.0f,
+						0.0f,		cosf(a),	-sinf(a),
+						0.0f,		sinf(a),	cosf(a)
+		);
 	};
 
 	Matrix3 Matrix3::MakeRotateY(float a)
 	{
-		return(	cosf(a),	0.0f,	-sinf(a),
-				0.0f,		1.0f,	0.0f,
-				sinf(a),	0.0f,	cosf(a)
-				);
+		return Matrix3(	cosf(a),	0.0f,	-sinf(a),
+						0.0f,		1.0f,	0.0f,
+						sinf(a),	0.0f,	cosf(a)
+		);
 	};
 	Matrix3 Matrix3::MakeRotateZ(float a)
 	{
-		return(	cosf(a),	sinf(a),	0.0f ,
-				-sinf(a),	cosf(a) ,	0.0f,
-				0.0f,		0.0f,		1.0f
-			);
+		return Matrix3(	cosf(a),	sinf(a),	0.0f ,
+						-sinf(a),	cosf(a) ,	0.0f,
+						0.0f,		0.0f,		1.0f
+		);
 	};
 
 	Matrix3 Matrix3::MakeEuler(float pitch, float yaw, float roll)
@@ -188,6 +192,10 @@ namespace MathClasses
 
 		return z * y * x;
 		
+	}
+	Matrix3 Matrix3::MakeEuler(Vector3 v_)
+	{
+		return MakeEuler(v_.x,v_.y,v_.z);
 	};
 
 	Matrix3 Matrix3::MakeScale(float xScale, float yScale, float zScale)
@@ -205,20 +213,24 @@ namespace MathClasses
 
 	Matrix3 Matrix3::MakeTranslation(float x_, float y_)
 	{
-		return Matrix3(
-						v[0],	v[1],	v[2],
-						v[3],	v[4],	v[5],
-						x_,		y_,		1.0f
+		Matrix3 temp(
+			1, 0, 0,
+			0, 1, 0,
+			x_, y_, 1
 		);
+
+		return temp;
 	};
 
 	Matrix3 Matrix3::MakeTranslation(float x_, float y_, float z_)
 	{
-		return Matrix3(
-			v[0],	v[1],	v[2],
-			v[3],	v[4],	v[5],
+		Matrix3 temp(
+			1,	0,	0,
+			0,	1,	0,
 			x_,		y_,		z_
 		);
+
+		return temp;
 	};
 
 	Matrix3& Matrix3::Translate(float x_, float y_)
@@ -238,5 +250,20 @@ namespace MathClasses
 		return *this;
 	}
 
+	std::string Matrix3::ToString() const
+	{
+		std::string output;
 
+		for (int i = 0; i < 9; i++)
+		{
+			if ((i) % 3 == 0 && i > 0)
+			{
+				output.append("\n");
+			};
+			output.append(std::to_string(float(v[i])));
+		};
+
+
+		return output;
+	};
 };

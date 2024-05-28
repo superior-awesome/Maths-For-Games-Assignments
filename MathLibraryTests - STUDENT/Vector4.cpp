@@ -30,11 +30,169 @@ namespace MathClasses
 		z = z_;
 		w = w_;
 	}
-	float Vector4::operator[](int dim)
+	Vector4 Vector4::operator+(Vector4 rhs_)
+	{
+		return Vector4( x+rhs_.x,
+						y + rhs_.y,
+						z + rhs_.z,
+						w + rhs_.w
+			);
+	}
+	Vector4& Vector4::operator+=(Vector4 rhs_)
+	{
+		x += rhs_.x;
+		y += rhs_.y;
+		z += rhs_.z;
+		w += rhs_.w;
+
+		return *this;
+	};
+
+	Vector4 Vector4::operator-(Vector4 rhs_)
+	{
+		return Vector4(x - rhs_.x,
+			y - rhs_.y,
+			z - rhs_.z,
+			w - rhs_.w
+		);
+	};
+	Vector4& Vector4::operator-=(Vector4 rhs_)
+	{
+		x -= rhs_.x;
+		y -= rhs_.y;
+		z -= rhs_.z;
+		w -= rhs_.w;
+
+		return *this;
+	};
+
+	Vector4 Vector4::operator*(float rhs_)
+	{
+		return Vector4(x * rhs_,
+			y * rhs_,
+			z * rhs_,
+			w * rhs_
+		);
+	};
+	Vector4& Vector4::operator*=(float rhs_)
+	{
+		x *= rhs_;
+		y *= rhs_;
+		z *= rhs_;
+		w *= rhs_;
+
+		return *this;
+	};
+
+	Vector4 Vector4::operator/(float rhs_)
+	{
+		return Vector4(
+			x / rhs_,
+			y / rhs_,
+			z / rhs_,
+			w / rhs_
+		);
+	}
+	Vector4& Vector4::operator/=(float rhs_)
+	{
+		x /= rhs_;
+		y /= rhs_;
+		z /= rhs_;
+		w /= rhs_;
+
+		return *this;
+	}
+
+	Vector4 operator*(float scale, const Vector4 V4_)
+	{
+		return Vector4(	V4_.x * scale,
+						V4_.y * scale,
+						V4_.z * scale,
+						V4_.w * scale
+		);
+	}
+
+	Vector4 operator/(float scale, const Vector4 V4_)
+	{
+		return Vector4(	V4_.x / scale,
+						V4_.y / scale,
+						V4_.z / scale,
+						V4_.w / scale
+		);
+	}
+
+
+	bool Vector4::operator==(Vector4 rhs_)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if ((abs(v[i] - rhs_.v[i])) > 0.00001f)
+			{
+				return false;
+			};
+		};
+
+		return true;
+	};
+
+	bool operator==(Vector4 lhs_, Vector4 rhs_)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if ((abs(lhs_.v[i] - rhs_.v[i])) > 0.00001f)
+			{
+				return false;
+			};
+		};
+
+		return true;
+	};
+
+	bool Vector4::operator!=(Vector4 rhs_)
+	{
+
+		for (int i = 0; i < 4; i++)
+		{
+			if ((abs(v[i] - rhs_.v[i])) > 0.00001f)
+			{
+				return true;
+			};
+		};
+
+		return false;
+
+	};
+
+	bool operator!=(Vector4 lhs_, Vector4 rhs_)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if ((abs(lhs_.v[i] - rhs_.v[i])) > 0.00001f)
+			{
+				return true;
+			};
+		};
+
+		return false;
+	};
+
+
+	float Vector4::operator[](int dim) const
 	{
 		return v[dim];
-	}
-	;
+	};
+
+	float& Vector4::operator[](int dim)
+	{
+		return v[dim];
+	};
+
+	Vector4::operator float* ()
+	{
+		return &v[0];
+	};
+
+
 
 	float Vector4::Magnitude() const
 	{
@@ -86,8 +244,23 @@ namespace MathClasses
 	{
 
 		return 0.0f;
+	}
+
+	std::string Vector4::ToString() const
+	{
+		std::string output;
+
+		output.append("( ");
+		output.append(std::to_string(float(x)));
+		output.append(", ");
+		output.append(std::to_string(float(y)));
+		output.append(", ");
+		output.append(std::to_string(float(z)));
+		output.append(", ");
+		output.append(std::to_string(float(w)));
+		output.append(" )\n");
+		return output;
 	};
 
 
-
-}
+};

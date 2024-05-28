@@ -4,8 +4,10 @@
 #define _VECTOR3_
 #endif // !_VECTOR3_
 
+
 namespace MathClasses
 {
+
 	Vector3::Vector3()
 	{
 		for (int i = 0; i < 3; i++)
@@ -54,7 +56,7 @@ namespace MathClasses
 			z - rhs_.z
 		);
 	};
-	
+
 	Vector3& Vector3::operator-=(Vector3 rhs_)
 	{
 		x -= rhs_.x;
@@ -71,7 +73,7 @@ namespace MathClasses
 			y *= f_,
 			z *= f_
 		);
-	};	
+	};
 
 	Vector3& Vector3::operator*=(float f_)
 	{
@@ -95,11 +97,11 @@ namespace MathClasses
 	{
 		x /= f_;
 		y /= f_;
-		z /= f_;	
+		z /= f_;
 		return *this;
 	};
-	
-	
+
+
 	Vector3 operator*(float scale, const Vector3 V3_)
 	{
 		return Vector3(
@@ -116,33 +118,26 @@ namespace MathClasses
 			V3_.y / scale,
 			V3_.z / scale
 		);
+	}
+
+	bool MathClasses::Vector3::operator==(Vector3 rhs_) const
+	{
+		return x == rhs_.x && y == rhs_.y && z == rhs_.z;
+	}
+
+	bool MathClasses::operator==(Vector3 lhs_, Vector3 rhs_) 
+	{
+		return  lhs_.x == rhs_.x && lhs_.y == rhs_.y && lhs_.z == rhs_.z;
 	};
 
-	bool Vector3::operator==(Vector3 rhs_)
+	bool MathClasses::Vector3::operator!=(Vector3 rhs_) const
 	{
-		for (int i = 0; i < 3; i++)
-		{
-			if (x != rhs_.x)
-			{
-				return false;
-			};
-		};
-
-		return true;
+		return  !(x == rhs_.x && y == rhs_.y && z == rhs_.z);
 	};
 
-	bool Vector3::operator!=(Vector3 rhs_)
+	bool MathClasses::operator!=(Vector3 lhs_, Vector3 rhs_)
 	{
-
-		if ((*this) == rhs_)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		};
-
+		return  !(lhs_.x == rhs_.x && lhs_.y == rhs_.y && lhs_.z == rhs_.z);
 	};
 
 	float& Vector3::operator[](int dim)
@@ -154,20 +149,13 @@ namespace MathClasses
 	{
 		return v[dim];
 	}
-	
-	Vector3::operator float*() 
+
+	Vector3::operator float* ()
 	{
-
-		float* temp = NULL;
-			//= &(v[0]);
-			//x = (float)x;
-			//y = (float)y;
-			//z = (float)z;
-
-			return temp;
+		return &v[0];
 	};
 
-	
+
 	float Vector3::Magnitude() const
 	{
 		return sqrtf(x * x + y * y + z * z);
@@ -209,9 +197,9 @@ namespace MathClasses
 
 	Vector3 Vector3::Cross(const Vector3& rhs_)
 	{
-		return Vector3(	y * rhs_.z - z * rhs_.y,
-						z * rhs_.x - x * rhs_.z,
-						x * rhs_.y - y * rhs_.x
+		return Vector3(y * rhs_.z - z * rhs_.y,
+			z * rhs_.x - x * rhs_.z,
+			x * rhs_.y - y * rhs_.x
 		);
 	};
 
@@ -225,15 +213,23 @@ namespace MathClasses
 		return acosf(c);
 	};
 
-	//Why does this not want to be scoped into the Vector3 scope?
-	//void Vector3::ToString()
-//	{
-	//	std::string output("ToString not implemented");
 
-		//return output;
-	//};
-	
-	
+	std::string Vector3::ToString() const
+	{
+		std::string output;
+
+		output.append("( ");
+		output.append(std::to_string(float(x)));
+		output.append(", ");
+		output.append(std::to_string(float(y)));
+		output.append(", ");
+		output.append(std::to_string(float(z)));
+
+		output.append(" )\n");
+		return output;
+	};
+
+
 
 
 };

@@ -34,14 +34,14 @@ namespace MathClasses
 
 		static Matrix3 MakeIdentity();
 
-
 		float& operator[](int dim);
-
 		const float& operator [](int dim) const;
 
-		Matrix3 operator*(const Matrix3& rhs) const;
 
+
+		Matrix3 operator*(const Matrix3& rhs) const;
 		Matrix3& operator*=(Matrix3& rhs);
+
 		Matrix3& operator*=(const Matrix3& rhs);
 
 		Vector3 operator*(Vector3 rhs) const;
@@ -50,19 +50,22 @@ namespace MathClasses
 
 		bool operator != (Matrix3 v_) const;
 
+		operator float* ();
+
 		Matrix3 Transposed() const;
 
-		Matrix3 MakeRotateX(float a);
-		Matrix3 MakeRotateY(float a);
-		Matrix3 MakeRotateZ(float a);
+		static Matrix3 MakeRotateX(float a);
+		static Matrix3 MakeRotateY(float a);
+		static Matrix3 MakeRotateZ(float a);
 
-		Matrix3 MakeEuler(float pitch, float yaw, float roll);
+		static Matrix3 MakeEuler(float pitch, float yaw, float roll);
+		static Matrix3 MakeEuler(Vector3 v_);
 
-		Matrix3 MakeScale(Vector3 scale);
-		Matrix3 MakeScale(float xScale, float yScale, float zScale);
+		static Matrix3 MakeScale(Vector3 scale);
+		static Matrix3 MakeScale(float xScale, float yScale, float zScale);
 
-		Matrix3 MakeTranslation(float x_, float y_);
-		Matrix3 MakeTranslation(float x_, float y_, float z_);
+		static Matrix3 MakeTranslation(float x_, float y_);
+		static Matrix3 MakeTranslation(float x_, float y_, float z_);
 
 		Matrix3& Translate(float x_, float y_);
 		Matrix3& Translate(float x_, float y_, float z_);
@@ -70,10 +73,7 @@ namespace MathClasses
 
 
 			
-		std::string ToString() const
-		{
-			return "Matrix3 ToString incomplete";
-		};
+		std::string ToString() const;
 
 	};
 };
