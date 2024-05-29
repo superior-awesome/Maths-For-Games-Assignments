@@ -40,8 +40,8 @@ namespace MathClasses
 		friend Vector3 operator* (float scale, const Vector3 V3_);
 		friend Vector3 operator/ (float scale, const Vector3 V3_);
 
-		friend bool Vector3::operator==(const Vector3 lhs_, const Vector3 rhs_);
-		friend bool Vector3::operator!=(const Vector3 lhs_, const Vector3 rhs_);
+	//	friend bool operator==(const Vector3 lhs_, const Vector3 rhs_);
+	//	friend bool operator!=(const Vector3 lhs_, const Vector3 rhs_);
 
 		bool operator==(const Vector3 rhs_) const;
 		bool operator!=(const Vector3 rhs_) const;

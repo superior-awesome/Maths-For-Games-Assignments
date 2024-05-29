@@ -120,6 +120,8 @@ namespace MathClasses
 		);
 	}
 
+	/*
+
 	bool MathClasses::operator==(Vector4 lhs_, Vector4 rhs_)
 	{
 		return	abs(lhs_.x - rhs_.x) < 0.00001f &&
@@ -137,6 +139,8 @@ namespace MathClasses
 			abs(lhs_.w - rhs_.w) < 0.00001f
 			);
 	}
+	
+	*/
 
 	bool Vector4::operator==(Vector4 rhs_) const
 	{

@@ -19,7 +19,7 @@ namespace MathClasses
 		{
 			v[i] = 0.0f;
 		};
-		v[0] = v[4] = v[8] = 1.0f;
+		//v[0] = v[4] = v[8] = 1.0f;
 	};
 
 	Matrix3::Matrix3(float f_)
@@ -134,12 +134,14 @@ namespace MathClasses
 			rhs.x * m3 + rhs.y * m6 + rhs.z * m9
 		);
 	}
+
+
 	bool Matrix3::operator==(Matrix3 v_) const
 	{
 		float tollerance = 0.00001f;
 		for (int i = 0; i < 9; i++)
 		{
-			if ((v[i] - v_[i]) > tollerance)	//	Need to do ABS
+			if (abs(v[i] - v_[i]) > tollerance)
 			{
 				return false;
 			}
@@ -152,14 +154,14 @@ namespace MathClasses
 		float tollerance = 0.00001f;
 		for (int i = 0; i < 9; i++)
 		{
-			if ((v[i] - v_[i]) > tollerance)	//	Need to do ABS
+			if (abs(v[i] - v_[i]) > tollerance)
 			{
 				return true;
 			}
 		};
 		return false;
 	}
-
+	/*
 	bool MathClasses::operator==(Matrix3 lhs_, Matrix3 rhs_)
 	{
 		float tollerance = 0.00001f;
@@ -185,6 +187,7 @@ namespace MathClasses
 		};
 		return true;
 	};
+	*/
 
 	Matrix3::operator float* ()
 	{

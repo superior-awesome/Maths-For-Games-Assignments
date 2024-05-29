@@ -44,7 +44,6 @@ namespace MathClasses
 
 		bool operator==(Matrix4 v_) const;
 
-		//bool operator==(Matrix4 v_);
 		bool operator != (Matrix4 v_) const;
 
 		Matrix4 Transposed() const;

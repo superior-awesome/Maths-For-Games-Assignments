@@ -118,38 +118,47 @@ namespace MathClasses
 		);
 	}
 
-	bool MathClasses::operator==(const Vector3 lhs_, const Vector3 rhs_)
+	/*
+	bool MathClasses::operator==(const Vector3 lhs_, const Vector3 rhs_) 
 	{
-		return
+
+		bool test =
 			abs(lhs_.x - rhs_.x) < 0.00001f &&
 			abs(lhs_.y - rhs_.y) < 0.00001f &&
 			abs(lhs_.z - rhs_.z) < 0.00001f;
-	}
+		return test;
+	};
 
 	bool MathClasses::operator!=(const Vector3 lhs_, const Vector3 rhs_) // DONT TOUCH THIS.
 	{
-		return  !(
+		bool test = !(
 				abs(lhs_.x - rhs_.x) < 0.00001f &&
 				abs(lhs_.y - rhs_.y) < 0.00001f &&
 				abs(lhs_.z - rhs_.z) < 0.00001f
 				);
+
+		return test;
 	};
+	*/
 
 	bool Vector3::operator==(const Vector3 rhs_) const
 	{
-		return
+		
+		bool test = abs(x - rhs_.x) < 0.00001f &&
+			abs(y - rhs_.y) < 0.00001f &&
+			abs(z - rhs_.z) < 0.00001f;
+
+		return test;
+	}
+
+	bool Vector3::operator!=(const Vector3 rhs_) const
+	{
+		bool test =
 			abs(x - rhs_.x) < 0.00001f &&
 			abs(y - rhs_.y) < 0.00001f &&
 			abs(z - rhs_.z) < 0.00001f;
 
-	}
-	bool Vector3::operator!=(const Vector3 rhs_) const
-	{
-		return !(
-			abs(x - rhs_.x) < 0.00001f &&
-			abs(y - rhs_.y) < 0.00001f &&
-			abs(z - rhs_.z) < 0.00001f
-		);
+		return test;
 	};
 
 

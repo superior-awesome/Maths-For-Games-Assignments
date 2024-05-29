@@ -48,8 +48,8 @@ namespace MathClasses
 		bool operator == (Matrix3 v_) const;
 		bool operator != (Matrix3 v_) const;
 
-		friend bool Matrix3::operator==(Matrix3 lhs_, Matrix3 rhs_);
-		friend bool Matrix3::operator!=(Matrix3 lhs_, Matrix3 rhs_);
+		//friend bool Matrix3::operator==(Matrix3 lhs_, Matrix3 rhs_);
+		//friend bool Matrix3::operator!=(Matrix3 lhs_, Matrix3 rhs_);
 
 		operator float* ();
 
