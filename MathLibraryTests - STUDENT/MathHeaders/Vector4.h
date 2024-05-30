@@ -22,6 +22,7 @@ namespace MathClasses
 
 		Vector4();
 		Vector4(float f_);
+		Vector4(float f_[4]);
 		Vector4(float x_, float y_, float z_, float w_);
 
 

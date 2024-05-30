@@ -21,6 +21,14 @@ namespace MathClasses
 			v[i] = f_;
 		}
 	};
+	
+	Vector4::Vector4(float f_[4])
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			v[i] = f_[i];
+		}
+	};
 
 	Vector4::Vector4(float x_, float y_, float z_, float w_)
 	{
@@ -29,6 +37,8 @@ namespace MathClasses
 		z = z_;
 		w = w_;
 	}
+
+
 	Vector4 Vector4::operator+(Vector4 rhs_)
 	{
 		return Vector4( x+rhs_.x,
@@ -120,28 +130,6 @@ namespace MathClasses
 		);
 	}
 
-	/*
-
-	bool MathClasses::operator==(Vector4 lhs_, Vector4 rhs_)
-	{
-		return	abs(lhs_.x - rhs_.x) < 0.00001f &&
-				abs(lhs_.y - rhs_.y) < 0.00001f &&
-				abs(lhs_.z - rhs_.z) < 0.00001f &&
-				abs(lhs_.w - rhs_.w) < 0.00001f;
-	}
-
-	bool MathClasses::operator!=(Vector4 lhs_, Vector4 rhs_)
-	{
-		return  !(
-			abs(lhs_.x - rhs_.x) < 0.00001f &&
-			abs(lhs_.y - rhs_.y) < 0.00001f &&
-			abs(lhs_.z - rhs_.z) < 0.00001f &&
-			abs(lhs_.w - rhs_.w) < 0.00001f
-			);
-	}
-	
-	*/
-
 	bool Vector4::operator==(Vector4 rhs_) const
 	{
 		return
@@ -185,23 +173,39 @@ namespace MathClasses
 
 	void Vector4::Normalise()
 	{
-		float m = this->Magnitude();
 
-		for (int i = 0; i < 4; i++)
+		if (Magnitude() > 0.00001f)
 		{
-			v[i] /= m;
+			float m = this->Magnitude();
+
+			for (int i = 0; i < 4; i++)
+			{
+				v[i] /= m;
+			}
+		}
+		else
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				v[i] = 0;
+			}
 		}
 	};
 
 	Vector4 Vector4::Normalised() const
 	{
-		float m = this->Magnitude();
-		Vector4 Output;
+		float m = Magnitude();
+		
+		Vector4 Output(0.0f);
 
-		for (int i = 0; i < 4; i++)
+		if (m > 0.00001f)
 		{
-			Output.v[i] /= m;
-		}
+			for (int i = 0; i < 4; i++)
+			{
+				Output[i] = v[i] / m;
+			};
+		};
+
 		return Output;
 	};
 

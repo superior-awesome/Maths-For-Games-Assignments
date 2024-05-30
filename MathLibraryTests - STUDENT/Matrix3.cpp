@@ -12,14 +12,12 @@
 
 namespace MathClasses
 {
-
 	Matrix3::Matrix3()
 	{
 		for (int i = 0; i < 9; i++)
 		{
 			v[i] = 0.0f;
 		};
-		//v[0] = v[4] = v[8] = 1.0f;
 	};
 
 	Matrix3::Matrix3(float f_)
@@ -83,9 +81,6 @@ namespace MathClasses
 	{
 		return v[dim];
 	};
-
-
-
 
 	Matrix3 Matrix3::operator*(const Matrix3& rhs) const
 	{
@@ -209,9 +204,9 @@ namespace MathClasses
 
 	Matrix3 Matrix3::MakeRotateY(float a)
 	{
-		return Matrix3(	cosf(a),	0.0f,	-sinf(a),
+		return Matrix3(	cosf(a),	0.0f,	sinf(a),
 						0.0f,		1.0f,	0.0f,
-						sinf(a),	0.0f,	cosf(a)
+						-sinf(a),	0.0f,	cosf(a)
 		);
 	};
 	Matrix3 Matrix3::MakeRotateZ(float a)
@@ -263,11 +258,14 @@ namespace MathClasses
 	{
 		return MakeTranslation(v_.x,v_.y,v_.z);
 	}
+
 	Matrix3 Matrix3::MakeTranslation(float x_, float y_, float z_)
 	{
-		return Matrix3();
-	}
-	;
+		return Matrix3(	1,0,0,
+						0,1,0,
+						x_,y_,z_
+				);
+	};
 
 
 	Matrix3& Matrix3::Translate(float x_, float y_)

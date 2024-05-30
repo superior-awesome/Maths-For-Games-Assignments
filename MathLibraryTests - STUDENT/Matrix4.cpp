@@ -49,22 +49,11 @@ namespace MathClasses
 
 		Matrix4::Matrix4(float f_[16])
 		{
-			m1 = f_[1];
-			m2 = f_[2];
-			m3 = f_[3];
-			m4 = f_[4];
-			m5 = f_[5];
-			m6 = f_[6];
-			m7 = f_[7];
-			m8 = f_[8];
-			m9 = f_[9];
-			m10 = f_[10];
-			m11 = f_[11];
-			m12 = f_[12];
-			m13 = f_[13];
-			m14 = f_[14];
-			m15 = f_[15];
-			m16 = f_[16];
+
+			for (int i = 0; i < 16; i++)
+			{
+				v[i] = f_[i];
+			};
 		};
 
 		Matrix4 Matrix4::MakeIdentity()
@@ -98,20 +87,22 @@ namespace MathClasses
 		Matrix4 Matrix4::operator*(const Matrix4& rhs) const
 		{
 			Matrix4 temp;
+			Matrix4 tempT;
 
 			for (int x = 0; x < 4; x++)
 			{
 				for (int y = 0; y < 4; y++)
 				{
-					int targetArray = (1 + y + (4 * x));
+					int targetArray = (x + (4 * y));
+					temp[targetArray] =
+						(mm[0][x] * rhs.mm[y][0]) +
+						(mm[1][x] * rhs.mm[y][1]) +
+						(mm[2][x] * rhs.mm[y][2]) +
+						(mm[3][x] * rhs.mm[y][3]);
+				};
+			};
 
-					temp[targetArray] = 
-						(mm[x][0] * rhs.mm[0][y]) +
-						(mm[x][1] * rhs.mm[1][y]) +
-						(mm[x][2] * rhs.mm[2][y]) +
-						(mm[x][3] * rhs.mm[3][y]);
-				}
-			}
+
 			return temp;
 		};
 
@@ -119,11 +110,11 @@ namespace MathClasses
 		Matrix4& Matrix4::operator*=(const Matrix4& rhs)
 		{
 
-			Matrix4 temp = (*this) * rhs;
+			Matrix4 tempM42 = (*this) * rhs;
 
 			for (int i = 0; i < 16; i++)
 			{
-				v[i] = rhs[i];
+				v[i] = tempM42[i];
 			}
 			return *this;
 		};
@@ -175,17 +166,17 @@ namespace MathClasses
 		}
 		Matrix4 Matrix4::MakeRotateY(float a)
 		{
-			return Matrix4(cosf(a), 0, -sinf(a), 0.0f,
-				0.0f, 1, 0, 0.0f,
-				sinf(a), 0.0f, cosf(a), 1.0f,
-				0, 0, 0, 1
+			return Matrix4(	cosf(a),	0,		sinf(a),	0.0f,
+							0.0f,		1,		0,			0.0f,
+							-sinf(a),	0.0f,	cosf(a),	0,
+							0,			0,		0,			1
 			);
 		};
 
 		Matrix4 Matrix4::MakeRotateZ(float a)
 		{
-			return Matrix4(cosf(a), -sinf(a), 0, 0,
-				sinf(a), cosf(a), 0, 0,
+			return Matrix4(cosf(a), sinf(a), 0, 0,
+				-sinf(a), cosf(a), 0, 0,
 				0.0f, 0.0f, 1, 0,
 				0, 0, 0, 1
 			);
@@ -202,18 +193,16 @@ namespace MathClasses
 
 		Matrix4 Matrix4::MakeEuler(Vector3 v_)
 		{
-
 			return MakeEuler(v_.x, v_.y, v_.z);
-
 		};
 
 		Matrix4 Matrix4::MakeTranslation(float x_, float y_, float z_)
 		{
-			Matrix4 temp(1, 0, 0, 0,
+			Matrix4 tempM43(1, 0, 0, 0,
 				0, 1, 0, 0,
 				0, 0, 1, 0,
 				x_, y_, z_, 1);
-			return temp;
+			return tempM43;
 
 		};
 
@@ -240,6 +229,7 @@ namespace MathClasses
 		std::string Matrix4::ToString() const
 		{
 			std::string output;
+					output.append( "\n");
 
 			for (int i = 0; i < 16; i++)
 			{
@@ -248,8 +238,10 @@ namespace MathClasses
 					output.append( "\n");
 				};
 				output.append(std::to_string(float(v[i])));
+				output.append(" ,");
 			};
 			
+					output.append( "\n");
 
 			return output;
 		};
