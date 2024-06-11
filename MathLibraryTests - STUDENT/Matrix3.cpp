@@ -12,30 +12,35 @@
 
 namespace MathClasses
 {
+
+	//Default constructor. Sets all elements to zero.
 	Matrix3::Matrix3()
 	{
 		for (int i = 0; i < 9; i++)
 		{
 			v[i] = 0.0f;
 		};
-	};
+	}
 
+	//Constructor sets all values to arg.
 	Matrix3::Matrix3(float f_)
 	{
 		for (int i = 0; i < 9; i++)
 		{
 			v[i] = f_;
 		};
-	};
+	}
 
+	//Constructor sets all values corresponding to a array arg (column then row).
 	Matrix3::Matrix3(float f_[9])
 	{
 		for (int i = 0; i < 9; i++)
 		{
 			v[i] = f_[i];
 		}
-	};
+	}
 
+	//Constructor sets all values corresponding to nine arg (column then row).
 	Matrix3::Matrix3(	float m1_, float m2_, float m3_,
 						float m4_, float m5_, float m6_,
 						float m7_, float m8_, float m9_)
@@ -49,39 +54,34 @@ namespace MathClasses
 		m7 = m7_;
 		m8 = m8_;
 		m9 = m9_;
-	};
+	}
 
-	//static Matrix3 MathClasses::Matrix3::MakeIdentity()
+	//Function creates and returns a identity matrix.
 	Matrix3 Matrix3::MakeIdentity()
 	{
 		Matrix3 identity;
+
 		identity.m1 = 1.0f;
-		identity.m2 = 0.0f;
-		identity.m3 = 0.0f;
-
-		identity.m4 = 0.0f;
 		identity.m5 = 1.0f;
-		identity.m6 = 0.0f;
-
-		identity.m7 = 0.0f;
-		identity.m8 = 0.0f;
 		identity.m9 = 1.0f;
 
 		return identity;
 
-	};
+	}
 
-
+	//Returns a mutable reference based on the subscript operator.
 	float& Matrix3::operator[](int dim)
 	{
 		return v[dim];
-	};
+	}
 
+	//Returns a constant reference based on the subscript operator.
 	const float& Matrix3::operator [](int dim) const
 	{
 		return v[dim];
-	};
+	}
 
+	//Multiplies two Matrix3s and returns a new Matrix3.
 	Matrix3 Matrix3::operator*(const Matrix3& rhs) const
 	{
 		Matrix3 temp;
@@ -99,10 +99,10 @@ namespace MathClasses
 		temp.m9 = (m3 * rhs.m7) + (m6 * rhs.m8) + (m9 * rhs.m9);
 
 		return temp;
-	};
+	}
 
 
-
+	//Sets LHS to LHS Matrix3 times RHS Matrix3.
 	Matrix3& Matrix3::operator*=(const Matrix3& rhs)
 	{
 
@@ -119,8 +119,9 @@ namespace MathClasses
 		m9 = (m3 * rhs.m7) + (m6 * rhs.m8) + (m9 * rhs.m9);
 
 		return *this;
-	};
+	}
 
+	//Multiplies a Matrix3 and a Vector3 and returns a new Vector3.
 	Vector3 Matrix3::operator*(Vector3 rhs) const
 	{
 		return Vector3(
@@ -130,7 +131,7 @@ namespace MathClasses
 		);
 	}
 
-
+	//Equality matrix3 operator.
 	bool Matrix3::operator==(Matrix3 v_) const
 	{
 		float tollerance = 0.00001f;
@@ -142,8 +143,9 @@ namespace MathClasses
 			}
 		};
 		return true;
-	};
+	}
 
+	//Not equality matrix3 operator.
 	bool Matrix3::operator != (Matrix3 v_) const
 	{
 		float tollerance = 0.00001f;
@@ -156,67 +158,47 @@ namespace MathClasses
 		};
 		return false;
 	}
-	/*
-	bool MathClasses::operator==(Matrix3 lhs_, Matrix3 rhs_)
-	{
-		float tollerance = 0.00001f;
-		for (int i = 0; i < 9; i++)
-		{
-			if ((lhs_.v[i] - rhs_.v[i]) > tollerance)	//	Need to do ABS
-			{
-				return true;
-			}
-		};
-		return false;
-	};
-	
-	bool MathClasses::operator!=(Matrix3 lhs_, Matrix3 rhs_)
-	{
-		float tollerance = 0.00001f;
-		for (int i = 0; i < 9; i++)
-		{
-			if ((lhs_.v[i] - rhs_.v[i]) > tollerance)	//	Need to do ABS
-			{
-				return false;
-			}
-		};
-		return true;
-	};
-	*/
 
+	//Returns the address of the first array data point.
 	Matrix3::operator float* ()
 	{
 		return &v[0];
-	};
+	}
 
+	//Transposes affected Matrix3.
 	Matrix3 Matrix3::Transposed() const
 	{
 		return Matrix3(m1, m4, m7, m2, m5, m8, m3, m6, m9);
-	};
+	}
 
+	//Rotates Matrix3 by x (pitch).
 	Matrix3 Matrix3::MakeRotateX(float a)
 	{
 		return Matrix3(	1.0f,		0.0f,			0.0f,
 						0.0f,		cosf(a),	-sinf(a),
 						0.0f,		sinf(a),	cosf(a)
 		);
-	};
+	}
 
+	//Rotates Matrix3 by y (yaw).
 	Matrix3 Matrix3::MakeRotateY(float a)
 	{
 		return Matrix3(	cosf(a),	0.0f,	sinf(a),
 						0.0f,		1.0f,	0.0f,
 						-sinf(a),	0.0f,	cosf(a)
 		);
-	};
+	}
+
+	//Rotates Matrix3 by z (roll).
 	Matrix3 Matrix3::MakeRotateZ(float a)
 	{
 		return Matrix3(	cosf(a),	sinf(a),	0.0f ,
 						-sinf(a),	cosf(a) ,	0.0f,
 						0.0f,		0.0f,		1.0f
 		);
-	};
+	}
 
+	//Recieves three arg as floats. Returns a Matrix3 which can be multiplied with a matrix 3 to rotate it in 3D space.
 	Matrix3 Matrix3::MakeEuler(float pitch, float yaw, float roll)
 	{
 		Matrix3 x = MakeRotateX(pitch);
@@ -226,11 +208,15 @@ namespace MathClasses
 		return z * y * x;
 		
 	}
+
+
+	//Recieves one arg as a Vector3. Returns a Matrix3 which can be multiplied with a matrix 3 to rotate it in 3 dimensions.
 	Matrix3 Matrix3::MakeEuler(Vector3 v_)
 	{
 		return MakeEuler(v_.x,v_.y,v_.z);
-	};
+	}
 
+	//Recieves three arg as floats. Returns a Matrix3 which can be multiplied with a matrix 3 to scale it in 3 dimensions.
 	Matrix3 Matrix3::MakeScale(float xScale, float yScale, float zScale)
 	{
 		return Matrix3(	xScale, 0.0f, 0.0f,
@@ -238,43 +224,49 @@ namespace MathClasses
 						0.0f, 0.0f, zScale
 		);
 	}
+
+	//Recieves two arg as floats. Returns a Matrix3 which can be multiplied with a Matrix3 to scale it in 2 dimensions.
 	Matrix3 Matrix3::MakeScale(float xScale, float yScale)
 	{
 		return MakeScale(xScale,yScale,1);
 	}
-	;
 	
+	//Recieves one arg as a Vector3. Returns a Matrix3 which can be multiplied with a matrix 3 to scale it in 3 dimensions.
 	Matrix3 Matrix3::MakeScale(Vector3 scale)
 	{
 		return MakeScale(scale.x, scale.y, scale.z);
-	};
+	}
 
+	//Takes two floats and sets location in space.
 	Matrix3 Matrix3::MakeTranslation(float x_, float y_)
 	{
 		return MakeTranslation(x_,y_,1);
-	};
+	}
 
+	//Takes a Vector3 and sets location in space.
 	Matrix3 Matrix3::MakeTranslation(Vector3 v_)
 	{
 		return MakeTranslation(v_.x,v_.y,v_.z);
 	}
 
+	//Taked three floats and sets the translation.
 	Matrix3 Matrix3::MakeTranslation(float x_, float y_, float z_)
 	{
 		return Matrix3(	1,0,0,
 						0,1,0,
 						x_,y_,z_
 				);
-	};
+	}
 
-
+	//Takes two floats and offsets the translation in the x and y directions.
 	Matrix3& Matrix3::Translate(float x_, float y_)
 	{
 		v[6] += x_;
 		v[7] += y_;
 		return *this;
-	};
+	}
 
+	//Takes three floats and offsets the translation in the x, y, and z directions.
 	Matrix3& Matrix3::Translate(float x_, float y_, float z_)
 	{
 		
@@ -284,6 +276,7 @@ namespace MathClasses
 		return *this;
 	}
 
+	//Formats the matrix for debugging purpouses.
 	std::string Matrix3::ToString() const
 	{
 		std::string output;
@@ -296,8 +289,6 @@ namespace MathClasses
 			};
 			output.append(std::to_string(float(v[i])));
 		};
-
-
 		return output;
-	};
+	}
 };

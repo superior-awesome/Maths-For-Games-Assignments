@@ -24,7 +24,7 @@ namespace MathClasses
 		void SetBlue(unsigned char input);
 		void SetAlpha(unsigned char input);
 
-		void printColour();
+		void printColour() const;
 
 		unsigned int colour;
 	private:

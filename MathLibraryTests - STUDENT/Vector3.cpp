@@ -265,7 +265,4 @@ namespace MathClasses
 		return output;
 	};
 
-
-
-
 };

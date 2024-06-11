@@ -11,7 +11,7 @@ namespace MathClasses
 		SetAlpha(255);
 	}
 	
-	//Constructor takes numbers 0<=1<256 or returns default constructor.
+	//Constructor takes numbers 0<=n<=255 or returns default constructor.
 	Colour::Colour(unsigned char r_, unsigned char g_, unsigned char b_, unsigned char a_)
 	{
 		if (
@@ -58,31 +58,31 @@ namespace MathClasses
 		return !((*this) == c_);
 	}
 
-	//Returns the Red value 0<=n<256.
+	//Returns the Red value 0<=n=255.
 	unsigned char Colour::GetRed() const
 	{
 		return colour >> 24;
 	}
 
-	//Returns the Green value 0<=n<256.
+	//Returns the Green value 0<=1<=255.
 	unsigned char Colour::GetGreen() const
 	{
 		return colour >> 16;
 	}
 
-	//Returns the Blue value 0<=n<256.
+	//Returns the Blue value 0<=1<=255.
 	unsigned char Colour::GetBlue() const
 	{
 		return colour >> 8;
 	}
 
-	//Returns the Alpha value 0<=n<256.
+	//Returns the Alpha value 0<=n=255.
 	unsigned char Colour::GetAlpha() const
 	{
 		return colour;
 	}
 
-	//Sets the Alpha value 0<=n<256.
+	//Sets the Alpha value 0<=n=255.
 	void Colour::SetRed(unsigned char input)
 	{
 
@@ -93,7 +93,7 @@ namespace MathClasses
 		colour = colour | R;
 	}
 
-	//Sets the Green value 0<=n<256.
+	//Sets the Green value 0<=n=255.
 	void Colour::SetGreen(unsigned char input)
 	{
 		unsigned int G = input << 16;
@@ -103,7 +103,7 @@ namespace MathClasses
 		colour = colour | G;
 	}
 
-	//Sets the Blue value 0<=n<256.
+	//Sets the Blue value 0<=n=255.
 	void Colour::SetBlue(unsigned char input)
 	{
 		unsigned int B = input << 8;
@@ -113,7 +113,7 @@ namespace MathClasses
 		colour = colour | B;
 	}
 
-	//Sets the Alpha value 0<=n<256.
+	//Sets the Alpha value 0<=n=255.
 	void Colour::SetAlpha(unsigned char input)
 	{
 		unsigned int A = input;
@@ -123,8 +123,8 @@ namespace MathClasses
 		colour = colour | A;
 	}
 
-	//Prints the colour to cout as a Binary.
-	void Colour::printColour()
+	//Prints the colour to std::cout as Binary.
+	void Colour::printColour() const
 	{
 
 		unsigned int bitTest = 0X80000000;

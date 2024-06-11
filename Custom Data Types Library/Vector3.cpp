@@ -133,7 +133,6 @@ Vector3 Vector3::operator*(const Matrix3& Mat3_)
 
 Vector3& Vector3::operator*=(const Matrix3& Mat3_)
 {
-	std::cout << "PING" << std::endl;
 	
 	Vector3 temp = (*this) * Mat3_;
 
